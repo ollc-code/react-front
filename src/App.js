@@ -2,7 +2,9 @@ import './App.css';
 import UserRoutes from './routes/UserRoutes';
 
 function App() {
-  const pathToRedirectForRoot = window.sessionStorage.getItem('token') ? '/' : '/dashboard';
+  console.log('token value: ', window.sessionStorage.getItem('token'));
+  // correction here \/
+  const pathToRedirectForRoot = window.sessionStorage.getItem('token') == null ? '/login' : '/dashboard';
 
   return (
     <UserRoutes pathToRedirectForRoot={pathToRedirectForRoot} />
