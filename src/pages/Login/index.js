@@ -6,12 +6,14 @@ import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import Checkbox from '@material-ui/core/Checkbox';
 import React, { useState, useEffect} from 'react';
+import Form from "@material-ui/core/FormGroup"
 import { API_BASE_URL } from '../../constants';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import useStyles from './styles';
+import axios from 'axios';
 
 function Login(props) {
 
@@ -22,36 +24,32 @@ function Login(props) {
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-      if (localStorage.getItem('token')) {
+      if (window.sessionStorage.getItem('token')) {
           props.history.push('/dashboard');
       }
   }, [props]);
 
   function login() {
-      
-    var formData = new FormData();
-        formData.append('username', username);
-        formData.append('password', password);
-        console.log(formData);
 
+        const postData = {
+          "username" : username,
+          "password": password
+        };
         var responseStatus, token;
-        fetch(`${API_BASE_URL}/auth/jwt`, {
-            method: 'POST',
-            body: formData,
-            mode: "no-cors"
-        }).then((response) => {
-            token = response.headers.get('token');
+        axios.post(`${API_BASE_URL}/auth/jwt/`, 
+          postData,
+          ).then((response) => {
+            token = response.data['token'];
             responseStatus = response.status;
-            return response.json();
+            return response.json;
         }).then((responseData) => {
             if (responseStatus === 200) {
-                localStorage.setItem('token', token);
+                window.sessionStorage.setItem('token', token);
                 props.history.push('/dashboard');
             } else console.log(responseData.message);
         }).catch((err) => {
             console.log(err.message);
         });
-        props.history.push('/dashboard');
     }
   
 
@@ -65,7 +63,7 @@ function Login(props) {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form}>
+        <Form className={classes.form}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -111,7 +109,7 @@ function Login(props) {
               </Link>
             </Grid>
           </Grid>
-        </form>
+        </Form>
       </div>
     </Container>
   );

@@ -4,7 +4,7 @@ import Login from '../pages/Login/index'
 import React from 'react';
 
 
-function AdminRoutes({pathToRedirectForRoot}) {
+function UserRoutes({pathToRedirectForRoot}) {
     return (
         <div>
             <Router>
@@ -18,4 +18,4 @@ function AdminRoutes({pathToRedirectForRoot}) {
     )
 }
 
-export default AdminRoutes;
+export default UserRoutes;
