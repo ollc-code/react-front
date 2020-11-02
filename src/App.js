@@ -1,8 +1,12 @@
 import './App.css';
-import Login from './pages/login'
+import UserRoutes from './routes/UserRoutes';
 
 function App() {
-  return <Login />
+  const pathToRedirectForRoot = localStorage.getItem('token') ? '/' : '/dashboard';
+
+  return (
+    <UserRoutes pathToRedirectForRoot={pathToRedirectForRoot} />
+  );
 }
 
 export default App;
