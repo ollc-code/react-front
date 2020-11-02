@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick = { () => { history.push('/dashboard')} }
+              onSubmit = { () => { history.push('/dashboard') } }
             >
               Sign In
             </Button>
