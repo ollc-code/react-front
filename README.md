@@ -2,6 +2,15 @@
 
 > ## Just npm start, and you may have to install the extra modules'
 
+Type the following command to install dependencies (node modules)
+
+1. `cd ~/react-front`
+
+2. `npm install`
+
+3. `npm start`
+
+
 ```
-npm install @material-ui/core @material-ui/icon react-router-dom
+Note: Not using yarn, but you could save your dependencies offline
 ```
