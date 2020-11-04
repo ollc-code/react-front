@@ -1,11 +1,12 @@
 import React from 'react'
+import '../global.css';
 
-export default function Announcementss() {
+export default function Announcements() {
 
     document.title = "Announcements | Orlem Connect";
 
     return (
-        <div>
+        <div className="spacing">
             <p>Announcements</p>
         </div>
     )
