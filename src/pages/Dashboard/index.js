@@ -1,17 +1,17 @@
+import Navbar from '../../components/Navbar/Navbar'
 import React from 'react'
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Navbar from './components/Navbar'
-import Readings from './pages/Readings';
+
 
 export default function Dashboard() {
+    
+    document.title = "Dashboard | Orlem Connect";
+
     return (
         <div>
-            <Router>
-                <Navbar />
-                <Switch>
-                    <Route path='/dashboard/readings' exact component={Readings} />
-                </Switch>
-            </Router>
+            <Navbar />
+            <div>
+                This is the dashboard.
+            </div>
         </div>
     )
 }

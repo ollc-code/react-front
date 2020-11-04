@@ -5,32 +5,26 @@ import * as IoIcons from 'react-icons/io';
 
 export const SidebarData = [
   {
-    title: 'Logout',
-    path: '/login',
-    icon: <AiIcons.AiOutlineLogout />,
+    title: 'Dashboard',
+    path: '/dashboard',
+    icon: <IoIcons.IoIosPaper />,
     cName: 'nav-text'
   },
   {
     title: 'Readings',
-    path: '/dashboard/readings',
+    path: '/readings',
     icon: <IoIcons.IoIosPaper />,
     cName: 'nav-text'
   },
   {
     title: 'Announcements',
-    path: '/dashboard/announcements',
+    path: '/announcements',
     icon: <FaIcons.FaPaperPlane />,
     cName: 'nav-text'
   },
   {
-    title: 'Priests',
-    path: '/dashboard/priests',
-    icon: <IoIcons.IoIosPerson />,
-    cName: 'nav-text'
-  },
-  {
-    title: 'Contacts',
-    path: '/dashboard/contacts',
+    title: 'Information',
+    path: '/information',
     icon: <FaIcons.FaGlobe/>,
     cName: 'nav-text'
   },
@@ -38,6 +32,12 @@ export const SidebarData = [
     title: 'Support',
     path: '/support',
     icon: <IoIcons.IoMdHelpCircle />,
+    cName: 'nav-text'
+  },
+  {
+    title: 'Logout',
+    path: '/dashboard',
+    icon: <AiIcons.AiOutlineLogout />,
     cName: 'nav-text'
   }
 ];
