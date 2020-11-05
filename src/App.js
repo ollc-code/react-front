@@ -1,5 +1,9 @@
 import './App.css';
 import AdminRoutes from './routes/AdminRoutes';
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import DashBoard from './pages/Dashboard/index';
+import Login from './pages/Login/index';
+
 
 function App() {
   console.log('token value: ', window.sessionStorage.getItem('token'));
@@ -8,7 +12,13 @@ function App() {
 
   return (
     <div>
-      <AdminRoutes />
+      <Router>
+        <Switch>
+          <Route exact path="/login" component={ Login }></Route>
+          <Route exact path='/dashboard' component={ DashBoard } />
+          <Redirect from="/" to="/dashboard" />
+      </Switch>
+      </Router>
     </div>
   );
 }

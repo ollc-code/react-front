@@ -1,81 +1,79 @@
-.navbar {
-  background-color: #ffffff;
-  height: 70px;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-}
-
-.menu-bars {
-  margin-left: 1rem;
-  font-size: 2rem;
-  background: none;
-}
-
-.nav-menu {
+/* The side navigation menu */
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 250px;
   background-color: #1e1e1e;
-  width: 300px;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
+  color: #f9f9f9;
   position: fixed;
-  top: 0;
-  left: -100%;
-  transition: 850ms;
-  font-weight: lighter;
-}
-
-.nav-menu.active {
-  left: 0;
+  height: 100%;
+  overflow: auto;
   transition: 350ms;
 }
 
-.nav-text {
-  display: flex;
+.sidebar-text {
+  text-decoration: None;
+  display: grid;
   justify-content: start;
   align-items: center;
-  padding: 8px 0px 8px 16px;
+  padding-left: 10px;
   list-style: none;
   height: 60px;
-  font-weight: lighter;
-}
-
-.nav-text a {
-  text-decoration: none;
-  color: #f9f9f9;
   font-size: 18px;
-  width: 95%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
   border-radius: 4px;
+  color: #f9f9f9;
+  font-weight: lighter;
+  transition: 300ms;
 }
 
-.nav-text a:hover {
-  background-color: #000000;
+.sidebar-text:hover{
+  background-color: black;
+}
+
+.sidebar a{
+  width: 100%;
+  text-decoration: None;
+  color: #f9f9f9;
+  font-weight: lighter;
+  transition: 300ms;
+}
+
+.sidebar a:hover{
+  color: cornflowerblue;
   font-weight: bold;
-  transition: 350ms;
+  transition: 300ms;
 }
-
-.nav-menu-items {
-  width: 100%;
-}
-
-.navbar-toggle {
-  background-color: #1e1e1e;
-  width: 100%;
-  height: 80px;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-}
-
 
 .nav-icon {
-  padding: 50px 20px 50px 50px;
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  padding: 20px;
 }
 
-span {
-  margin-left: 16px;
+
+/* On screens that are less than 700px wide, make the sidebar into a topbar */
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    transition: 350ms;
+  }
+  .sidebar-text {
+    display: flex;
+    justify-content: center;
+    transition: 350ms;
+  }
+  div.content {
+    margin-left: 0;
+  }
+}
+
+/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+@media screen and (max-width: 400px) {
+  .sidebar-text{
+    text-align: center;
+    float: none;
+  }
 }

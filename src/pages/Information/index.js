@@ -1,14 +1,13 @@
-import React from 'react'
-import "../global.css";
+import React from 'react';
 
 
-export default function Information() {
+export default function Readings() {
 
     document.title = "Information | Orlem Connect";
 
     return (
-        <div className="spacing">
-            <p>Contacts, Priests, etc</p>
+        <div>
+            Contacts, Priests, Cells, etc
         </div>
     )
 }

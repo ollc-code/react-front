@@ -1,0 +1,5 @@
+/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+.spacing {
+    margin-left: 250px;
+    padding: 20px 30px;
+  }

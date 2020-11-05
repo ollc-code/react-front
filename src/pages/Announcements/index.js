@@ -1,13 +1,13 @@
-import React from 'react'
-import '../global.css';
+import React from 'react';
 
-export default function Announcements() {
+
+export default function Readings() {
 
     document.title = "Announcements | Orlem Connect";
 
     return (
-        <div className="spacing">
-            <p>Announcements</p>
+        <div>
+            The Announcements Page
         </div>
     )
 }

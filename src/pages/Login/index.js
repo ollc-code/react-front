@@ -102,6 +102,9 @@ function Login(props) {
               }}
             >Sign In
           </Button>
+          <a href="/dashboard">
+            Fast Link to Dashboard
+          </a>
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
