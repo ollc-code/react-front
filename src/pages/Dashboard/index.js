@@ -1,32 +1,36 @@
-import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
-import Navbar from '../../components/Navbar/Navbar';
-import Announcements from '../Announcements/index';
-import Information from '../Information/index';
-import Readings from '../Readings/index';
-import Support from '../Support/index';
-import Login from '../Login/index';
-import '../../globals.css';
-import React from 'react';
+import { Container } from '@material-ui/core';
+import {
+    BrowserRouter as Router,
+    Switch, Route
+} from 'react-router-dom';
+import SideBar from './SideBar/sidebar';
+import Announcements from './Announcements';
+import Information from './Information'
+import Readings from './Readings';
+import Support from './Support';
+import Home from './Home';
+import useStyles from './styles';
 
-export default function Dashboard() {
-    
-    document.title = "Dashboard | Orlem Connect";
 
+const Dashboard = () => {
+    const classes = useStyles()
 
     return (
-        <div>
-            <Router>
-                <Navbar />
-                <div className="spacing">
+        <Router>
+            <Container className={classes.root}>
+                <SideBar />
+                <main className={classes.content}>
                     <Switch>
-                        {/* <Route exact path="/dashboard" component={ Dashboard }></Route> */}
-                        <Route exact path="/readings" component={ Readings }></Route>
-                        <Route exact path="/announcements" component={ Announcements }></Route>
-                        <Route exact path="/information" component={ Information }></Route>
-                        <Route exact path="/support" component={ Support }></Route>
+                        <Route path="/announcements" exact component={Announcements} />
+                        <Route path="/information" exact component={Information} />
+                        <Route path="/readings" exact component={Readings} />
+                        <Route path="/support" exact component={Support} />
+                        <Route path="/"  component={Home} />
                     </Switch>
-                </div>
-            </Router>
-        </div>
+                </main>
+            </Container>
+        </Router>
     )
 }
+
+export default Dashboard;

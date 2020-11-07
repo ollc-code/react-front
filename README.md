@@ -1,8 +1,10 @@
-# OLLC staff-site react
+## OLLC Front-End ~ React
 
-> ## Just npm start, and you may have to install the extra modules'
+> ## Just npm start, and you may have to install few extra modules'
 
-Type the following command to install dependencies (node modules)
+---
+
+### Type the following command to install dependencies (node modules)
 
 1. `cd ~/react-front`
 

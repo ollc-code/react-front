@@ -1,25 +1,29 @@
-import './App.css';
-import AdminRoutes from './routes/AdminRoutes';
-import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
-import DashBoard from './pages/Dashboard/index';
-import Login from './pages/Login/index';
+import {
+  Container,
+  CssBaseline,
+} from "@material-ui/core";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from 'react-router-dom';
+
+import Dashboard from './pages/Dashboard';
+import Login from './pages/Login';
 
 
 function App() {
-  console.log('token value: ', window.sessionStorage.getItem('token'));
-  // correction here \/
-  //const pathToRedirectForRoot = window.sessionStorage.getItem('token') == null ? '/login' : '/dashboard';
-
   return (
-    <div>
-      <Router>
-        <Switch>
-          <Route exact path="/login" component={ Login }></Route>
-          <Route exact path='/dashboard' component={ DashBoard } />
-          <Redirect from="/" to="/dashboard" />
-      </Switch>
-      </Router>
-    </div>
+    <Container>
+      <CssBaseline/>
+        <Router>
+          <Switch>
+            <Route path="/login" exact component={Login} />
+            <Route path="/dashboard" exact component={Dashboard} />
+          </Switch>
+        </Router>
+    </Container>
   );
 }
 

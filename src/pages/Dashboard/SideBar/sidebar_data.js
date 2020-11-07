@@ -2,7 +2,7 @@ import React from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as IoIcons from 'react-icons/io';
 
-export const SidebarData = [
+const SideBarData = [
   {
     title: 'Dashboard',
     path: '/dashboard',
@@ -34,3 +34,5 @@ export const SidebarData = [
     cName: 'sidebar-text'
   },
 ];
+
+export default SideBarData;
