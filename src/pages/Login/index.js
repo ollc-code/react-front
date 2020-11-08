@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import Checkbox from '@material-ui/core/Checkbox';
-import React, { useState, useEffect} from 'react';
+import React, { useState} from 'react';
 import Form from "@material-ui/core/FormGroup"
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
