@@ -10,6 +10,7 @@ import Readings from './Readings';
 import Support from './Support';
 import Home from './Home';
 import useStyles from './styles';
+import PriestsInfo from './Information';
 
 
 const Dashboard = () => {
@@ -22,10 +23,14 @@ const Dashboard = () => {
                 <main className={classes.content}>
                     <Switch>
                         <Route path="/announcements" exact component={Announcements} />
+                        <Route path="/priestsInfo" exact component={ PriestsInfo } />
                         <Route path="/information" exact component={Information} />
+
+                        
                         <Route path="/readings" exact component={Readings} />
                         <Route path="/support" exact component={Support} />
-                        <Route path="/"  component={Home} />
+                        
+                        <Route path="/"  exact component={Home} />
                     </Switch>
                 </main>
             </Container>
