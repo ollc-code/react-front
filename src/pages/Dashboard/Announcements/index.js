@@ -1,14 +1,14 @@
+import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 import React, { useEffect, useState } from 'react';
 import {
   Typography, Container,
   CircularProgress, Divider,
-  Box, List, ListItem,
+  Box, List, ListItem, Card, CardContent,
   Button, TextareaAutosize, TextField,
-  Modal, Fade, ListItemText,
+  Modal, Fade,
 } from '@material-ui/core';
-import axios from 'axios';
-import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 import useStyles from './styles';
+import axios from 'axios';
 
 
 const Announcements = () => {
@@ -19,7 +19,7 @@ const Announcements = () => {
   const apiUrl = 'http://localhost:8000/announcements/';
   const [done, setDone] = useState(undefined);
   const [addModal, setAddModal] = useState(false);
-  const [newAnnouncement, setNewAnnouncement] = useState("");
+  const [newAnnouncement, setNewAnnouncement] = useState(undefined);
 
   const handleAddModal = () => {
     addModal ? (
@@ -46,18 +46,20 @@ const Announcements = () => {
         Announcements
       </Typography>
       <Divider />
-      <Container>
+      <Container
+        className={classes.main}
+      >
         {
         !done ? (
-          <Box display="grid">
-            <CircularProgress />
-            <Typography>
-            Make sure the app is running...
-            </Typography>
+          <Box className={classes.loadingBox}>
+              <CircularProgress/>
+              <Typography>
+                &nbsp;&nbsp; Is the app running?
+              </Typography>
           </Box>
         ) : (
-          <Box display="grid">
-            <Button onClick={handleAddModal} variant="contained" color="primary">
+          <Box className={classes.main} display="grid">
+            <Button className={classes.addButton} onClick={handleAddModal} variant="contained" color="primary">
               Add
             </Button>
             <Modal
@@ -65,25 +67,10 @@ const Announcements = () => {
               onClose={handleAddModal}
               className={classes.modal}
               closeAfterTransition
-              disableScrollLock={true}
-              aria-labelledby="simple-modal-title"
-              aria-describedby="simple-modal-description"
-              >
+              disableScrollLock={true} >
                 <Fade in={addModal}>
-                  <Container display="grid" justifyContent="center" maxWidth="sm" className={classes.paper}>
-                    <TextField
-                      label="New Announcement"
-                      multiline
-                      fullWidth
-                      value={newAnnouncement}
-                      onChange={(e) => {
-                        setNewAnnouncement(e.target.value)
-                      }}
-                      rows={6}
-                      variant="outlined"
-                    />
-                  <Button variant="contained" fullWidth color="secondary"
-                    onClick={
+                  <Container display="grid" justifyContent="center" maxWidth="sm" className={[classes.paper, classes.main]}>
+                    <form onSubmit={
                       () => {
                         setDone(false);
                         //console.log("Insert");
@@ -98,19 +85,38 @@ const Announcements = () => {
                             }
                           }).then(() => setDone(true));
                         }, 1200);
-                        setNewAnnouncement("");
+                        setNewAnnouncement(undefined);
                       }
-                    }
+                    }>
+                    <TextField
+                      label="New Announcement"
+                      required
+                      multiline
+                      fullWidth
+                      value={newAnnouncement}
+                      onChange={(e) => {
+                        setNewAnnouncement(e.target.value)
+                      }}
+                      rows={6}
+                      variant="outlined"
+                    />
+                  <Button type="submit" fullWidth color="secondary"
                   >Add</Button>
+                    </form>
+
                   </Container>
                 </Fade>
             </Modal>
             <List>
               {announcements.map((item, index) => (
                 <ListItem className={classes.listItem}>
-                    <ListItemText multiline className={classes.listText} variant="body"
-                      >{item.fields.text}</ListItemText>
-                      <Button variant="outlined" onClick={() => {
+                  <Card className={classes.card} >
+                  <CardContent className={classes.cardContent}>
+                    <Typography  className={classes.cardContent}>
+                    {item.fields.text}
+                    </Typography>
+                  </CardContent>
+                  <Button variant="outlined" onClick={() => {
                       setDone(false);
                       //console.log("Delete:" + item.pk);
                       setTimeout(() => {
@@ -122,7 +128,8 @@ const Announcements = () => {
                       }, 1200);
                     }}>
                       <DeleteOutlinedIcon />
-                    </Button>
+                  </Button>
+                  </Card>
                 </ListItem>
               ))}
             </List>
