@@ -9,10 +9,11 @@ import {
 } from '@material-ui/core';
 import useStyles from './styles';
 import axios from 'axios';
-
+import { useSnackbar } from 'notistack';
 
 const Announcements = () => {
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [announcements, setAnnouncements] = useState([]);
 
@@ -37,7 +38,7 @@ const Announcements = () => {
           //console.log(announcements);
         }
       }).then(() => setDone(true));
-    }, 1200);
+    }, 1200, 5000)
   }
   
   return (
@@ -62,6 +63,7 @@ const Announcements = () => {
             <Button className={classes.addButton} onClick={handleAddModal} variant="contained" color="primary">
               Add
             </Button>
+            
             <Modal
               open={addModal}
               onClose={handleAddModal}
@@ -81,9 +83,14 @@ const Announcements = () => {
                         }
                           axios.post(apiUrl, a).then((repos) => {
                             if(repos.status === 200){
-                              //console.log(repos.data);
+                              enqueueSnackbar("Announcement Added!")
                             }
-                          }).then(() => setDone(true));
+                            else{
+                              enqueueSnackbar("Announcement Not Added", "error")
+                            }
+                          }).then(() => {
+                            setDone(true);                      
+                          });
                         }, 1200);
                         setNewAnnouncement(undefined);
                       }
@@ -100,39 +107,46 @@ const Announcements = () => {
                       rows={6}
                       variant="outlined"
                     />
-                  <Button type="submit" fullWidth color="secondary"
+                  <Button type="submit" variant="contained" fullWidth color="secondary"
                   >Add</Button>
                     </form>
 
                   </Container>
                 </Fade>
             </Modal>
-            <List>
-              {announcements.map((item, index) => (
-                <ListItem className={classes.listItem}>
-                  <Card className={classes.card} >
-                  <CardContent className={classes.cardContent}>
-                    <Typography  className={classes.cardContent}>
-                    {item.fields.text}
-                    </Typography>
-                  </CardContent>
-                  <Button variant="outlined" onClick={() => {
-                      setDone(false);
-                      //console.log("Delete:" + item.pk);
-                      setTimeout(() => {
-                        axios.delete(apiUrl + item.pk).then((repos) => {
-                          if(repos.status === 200){
-                            //console.log(repos.data);
-                          }
-                        }).then(() => setDone(true));
-                      }, 1200);
-                    }}>
-                      <DeleteOutlinedIcon />
-                  </Button>
-                  </Card>
-                </ListItem>
-              ))}
-            </List>
+            <Box>
+              <List>
+                {announcements.map((item, index) => (
+                  <ListItem className={classes.listItem}>
+                    <Card className={classes.card} >
+                    <CardContent className={classes.cardContent}>
+                      <Typography  className={classes.cardContent}>
+                      {item.fields.text}
+                      </Typography>
+                    </CardContent>
+                    <Button variant="outlined" onClick={() => {
+                        setDone(false);
+                        //console.log("Delete:" + item.pk);
+                        setTimeout(() => {
+                          axios.delete(apiUrl + item.pk).then((repos) => {
+                            if(repos.status === 200){
+                              enqueueSnackbar("Announcement Deleted!");
+                            }
+                            else{
+                              enqueueSnackbar("Announcement Not Deleted!", "error");
+                              setDone(true);
+                            }
+                          }).then(() => setDone(true));
+                        }, 1200);
+                      }}>
+                        <DeleteOutlinedIcon />
+                    </Button>
+                    </Card>
+                  </ListItem>
+                ))}
+              </List>
+              
+            </Box>
           </Box>
         )}
       </Container>
