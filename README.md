@@ -1,7 +1,9 @@
 # OLLC staff-site react
 
-> ## Just npm start, and you may have to install the extra modules'
+> ## Run the command below after pulling the code from the repo
 
 ```
-npm install @material-ui/core @material-ui/icon react-router-dom
+npm install
 ```
+
+> ## After which you can run `npm start`
