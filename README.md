@@ -16,3 +16,7 @@
 ```
 Note: Not using yarn, but you could save your dependencies offline
 ```
+npm install
+```
+
+> ## After which you can run `npm start`
