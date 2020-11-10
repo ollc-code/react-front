@@ -5,13 +5,16 @@ import {
   ThemeProvider
 } from "@material-ui/core";
 import theme from "./theme";
+import {SnackbarProvider} from 'notistack';
 //import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
+    <SnackbarProvider maxSnack={3}>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </SnackbarProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -9,8 +9,13 @@ import {
 import React from 'react';
 
 
-export default function PermanentDrawerLeft() {
+export default function PermanentDrawerLeft({props}) {
   const classes = useStyles();
+
+  function logout(){
+    window.sessionStorage.removeItem("token");
+    props.history.push('/login');
+  }
 
   return (
       <Drawer
@@ -33,7 +38,7 @@ export default function PermanentDrawerLeft() {
               </ListItem>
             </Link>
           ))}
-          <a href="/login">
+          <a onClick={logout}>
             <ListItem button>
                 <ListItemIcon> (Icon) </ListItemIcon>
                 <ListItemText color="primary">

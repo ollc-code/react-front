@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import Checkbox from '@material-ui/core/Checkbox';
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import Form from "@material-ui/core/FormGroup"
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -14,7 +14,18 @@ import Grid from '@material-ui/core/Grid';
 import useStyles from './styles';
 
 
-const Login = () => {
+const Login = (props) => {
+
+  useEffect(() => {
+      if (window.sessionStorage.getItem('token')) {
+          props.history.push('/dashboard');
+      }
+  }, [props]);
+
+  function login(){
+    window.sessionStorage.setItem('token', "placeholder-token");
+    props.history.push('/dashboard');
+  }
 
   document.title = "Login | Orlem Connect";
 
@@ -66,12 +77,9 @@ const Login = () => {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick = ""
+            onClick={login}
             >Sign In
           </Button>
-          <a href="/dashboard">
-            Fast Link to Dashboard
-          </a>
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
