@@ -4,6 +4,8 @@ import {Container, Typography, Divider} from '@material-ui/core';
 
 export default function Support() {
 
+  document.title = "Support | Orlem Connect"
+
   return (
     <Container>
       <Typography variant="h4">

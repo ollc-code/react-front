@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(1),
       borderRadius: 6,
       boxShadow: theme.shadows[5],
+      fontSize: "larger",
     },
   }));
 

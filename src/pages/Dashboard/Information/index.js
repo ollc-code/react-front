@@ -26,6 +26,9 @@ const useStyles = makeStyles({
 
 export default function Information() {
   const classes = useStyles();
+
+  document.title = "Information | Orlem Connect"
+
   return (
     <div>
       
