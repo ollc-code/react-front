@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import {Container, Typography, Divider, Box} from '@material-ui/core';
+import {Container, 
+  Typography, 
+  Divider, 
+  Box, List, 
+ListItem, ListItemText
+} from '@material-ui/core';
 import { BrowserRouter as Router, Switch, Link, Route, Redirect } from 'react-router-dom';
-
-import PriestsInfo from './priests_info';
+import {API_BASE_URL} from '../../../constants';
+import axios from 'axios';
 
 
 const useStyles = makeStyles({
@@ -24,33 +29,50 @@ const useStyles = makeStyles({
   color: 'white',
 });
 
+
 export default function Information() {
   const classes = useStyles();
 
   document.title = "Information | Orlem Connect"
 
+  const [getPriests, setGetPriests] = useState(false);
+  const [priests, setPriests] = useState([]);
+
+  if(!getPriests){
+    setTimeout(() => {
+      axios.get(API_BASE_URL + "information/priests/").then((repos) => {
+        if(repos.status === 200){
+          setPriests(JSON.parse(repos.data));
+          console.log(priests);
+        }
+      }).then(() => setGetPriests(true));
+    }, 1200, 5000)
+  }
+
   return (
     <div>
-      
         <Container>
           <Typography variant="h4">
               Information
           </Typography>
           <Divider />
           <Box className={classes.main}>
-            <Card className={classes.root}>
-              <CardContent>
-                <Typography variant="h3" component="h2">
+                <Typography variant="h5">
                   Priests
                 </Typography>
-                <Typography variant="body2" component="p">
-                  Update Priest Info
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Link to="/priestsInfo">Edit | Update</Link>
-              </CardActions>
-            </Card>
+                <List>
+                  {
+                  priests.map((item, index) => (
+                      <Card className={classes.root}>
+                        <CardContent>
+                          {item.fields.name}
+                        </CardContent>
+                        <img src="http://localhost:8000/media/profiles/butterfly.jpg/"
+                          height="200" />
+                      </Card>
+                  ))
+                }
+                </List>
           </Box>    
       </Container>
     </div>
