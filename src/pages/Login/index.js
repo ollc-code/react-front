@@ -5,23 +5,16 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import Checkbox from '@material-ui/core/Checkbox';
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Form from "@material-ui/core/FormGroup"
-import { API_BASE_URL } from '../../constants';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import useStyles from './styles';
-import axios from 'axios';
 
-function Login(props) {
 
-  document.title = "Login | Orlem Connect";
-
-  const classes = useStyles();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+const Login = (props) => {
 
   useEffect(() => {
       if (window.sessionStorage.getItem('token')) {
@@ -29,29 +22,16 @@ function Login(props) {
       }
   }, [props]);
 
-  function login() {
+  function login(){
+    window.sessionStorage.setItem('token', "placeholder-token");
+    props.history.push('/dashboard');
+  }
 
-        const postData = {
-          "username" : username,
-          "password": password
-        };
-        var responseStatus, token;
-        axios.post(`${API_BASE_URL}/auth/jwt/`, 
-          postData,
-          ).then((response) => {
-            token = response.data['token'];
-            responseStatus = response.status;
-            return response.json;
-        }).then((responseData) => {
-            if (responseStatus === 200) {
-                window.sessionStorage.setItem('token', token);
-                props.history.push('/dashboard');
-            } else console.log(responseData.message);
-        }).catch((err) => {
-            console.log(err.message);
-        });
-    }
-  
+  document.title = "Login | Orlem Connect";
+
+  const classes = useStyles();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <Container component="main" maxWidth="xs">
@@ -97,9 +77,7 @@ function Login(props) {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick = {() => {
-              login();
-              }}
+            onClick={login}
             >Sign In
           </Button>
           <Grid container>
