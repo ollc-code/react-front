@@ -9,7 +9,7 @@ import {
 import React from 'react';
 import theme from '../../../theme';
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import logo from '../../../assets/static.png';
+import logo from '../../../assets/logo_dark.svg';
 
 export default function PermanentDrawerLeft({props}) {
   const classes = useStyles();
