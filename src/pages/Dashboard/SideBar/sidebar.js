@@ -1,5 +1,5 @@
 import SideBarData from './sidebar_data';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import useStyles from '../styles';
 import {
   ListItemIcon, ListItemText,
@@ -7,6 +7,8 @@ import {
   Drawer, List,
  } from '@material-ui/core';
 import React from 'react';
+import theme from '../../../theme';
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 
 export default function PermanentDrawerLeft({props}) {
@@ -29,19 +31,25 @@ export default function PermanentDrawerLeft({props}) {
         <Divider />
         <List>
           {SideBarData.map((item, index) => (
-            <Link to={item.path}>
+            <NavLink
+              className={classes.drawerItem}
+              activeStyle={{
+                  fontWeight: "bolder",
+                  color: theme.palette.secondary.main
+                }} 
+                to={item.path}>
               <ListItem button>
-                  <ListItemIcon>{ item.icon }</ListItemIcon>
-                  <ListItemText color="primary">
+                  <ListItemIcon className={classes.icon}>{ item.icon }</ListItemIcon>
+                  <ListItemText >
                   {item.title}
                   </ListItemText>
               </ListItem>
-            </Link>
+            </NavLink>
           ))}
           <a onClick={logout}>
             <ListItem button>
-                <ListItemIcon> (Icon) </ListItemIcon>
-                <ListItemText color="primary">
+                <ListItemIcon className={classes.icon}> <ExitToAppIcon /> </ListItemIcon>
+                <ListItemText className={classes.drawerText} color="primary">
                   Logout
                 </ListItemText>
             </ListItem>

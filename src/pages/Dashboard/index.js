@@ -3,18 +3,22 @@ import {
     BrowserRouter as Router,
     Switch, Route, Redirect,
 } from 'react-router-dom';
-import SideBar from './SideBar/sidebar';
+
 import Announcements from './Announcements';
-import Information from './Information'
+import Information from './Information';
+import SideBar from './SideBar/sidebar';
+import PriestsInfo from './Information';
 import Readings from './Readings';
 import Support from './Support';
 import Home from './Home';
+
 import useStyles from './styles';
-import PriestsInfo from './Information';
 import React, { useEffect } from 'react';
 
 
 const Dashboard = (props) => {
+
+    document.title = "Dashboard | Orlem Connect"
 
     useEffect(() => {
         if (!window.sessionStorage.getItem('token')) {
