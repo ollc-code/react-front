@@ -9,7 +9,7 @@ import {
 import React from 'react';
 import theme from '../../../theme';
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-
+import logo from '../../../assets/static.png';
 
 export default function PermanentDrawerLeft({props}) {
   const classes = useStyles();
@@ -30,6 +30,9 @@ export default function PermanentDrawerLeft({props}) {
       >
         <Divider />
         <List>
+          <ListItem className={classes.SidebarLogo}>
+            <ListItemIcon> <img src={logo} height="100" /> </ListItemIcon>
+          </ListItem>
           {SideBarData.map((item, index) => (
             <NavLink
               className={classes.drawerItem}
