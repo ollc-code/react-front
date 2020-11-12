@@ -73,7 +73,7 @@ function PriestsInfo(props) {
                                 <CardActionArea>
                                     <CardMedia
                                         component="img"
-                                        alt="Contemplative Reptile"
+                                        alt={item.fields.name}
                                         height="140"
                                         image={API_BASE_URL + "media/" + item.fields.profile_pic}
                                         title="Contemplative Reptile"
