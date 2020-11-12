@@ -38,12 +38,14 @@ function PriestsInfo(props) {
     const classes = useStyles();
     
     const [priests, setPriests] = useState([]);
+    const [currentItem, setCurrentItem] = useState({});
 
     function fetchData() {
         axios.get(API_BASE_URL + "information/priests/").then((resp)=>{
             if (resp.status == 200){
                 console.log(resp.data);
                 setPriests(JSON.parse(resp.data));
+                setCurrentItem(resp.data[0])
             } 
         }).then(() => {
             setOnLoad(true);
@@ -51,13 +53,27 @@ function PriestsInfo(props) {
         )
     }
 
-    if(!onLoad){
-        setTimeout(fetchData(), 1200)
+    function handleAlert(item){
+        setCurrentItem(item);
+        console.log("what");
+        setAlert(true);
+        
     }
+
+    useEffect(() => {
+        setTimeout(fetchData(), 1200)
+    }, [onLoad])
 
     return (
         <div>
             <Button onClick={ () => { props.back(false) } }> \back </Button>
+            {
+                alert ? (
+                    <AlertDialog open={alert} handleClose={setAlert} id={currentItem.pk} name={ currentItem.name } />
+                ) : (
+                    <Box />
+                )
+            }
             {
                 onLoad ?
                 (
@@ -88,13 +104,13 @@ function PriestsInfo(props) {
                                     </CardContent>
                                 </CardActionArea>
                                 <CardActions>
-                                    <Button size="small" color="primary">
+                                    <Button size="small" variant="outlined" color="primary">
                                         Edit
                                     </Button>
-                                    <Button size="small" color="primary" onclick={ () => {
-                                                    <AlertDialog id={ item.pk } name={ item.fields.name } />
-                                                }
-                                            }
+                                    <Button size="small" variant="outlined" color="primary" 
+                                        onClick={() => {
+                                            handleAlert(item)
+                                        }}
                                         >
                                         Delete
                                     </Button>
@@ -103,7 +119,7 @@ function PriestsInfo(props) {
                         ))
                     }
                     </List>
-                </Box>    
+                </Box>
                 )
                 :
                 (

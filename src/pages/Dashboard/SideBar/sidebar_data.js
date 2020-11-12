@@ -4,7 +4,7 @@ import MenuBookOutlinedIcon from "@material-ui/icons/MenuBookOutlined";
 import AnnouncementIcon from "@material-ui/icons/Announcement";
 import HelpIcon from "@material-ui/icons/Help";
 import DescriptionIcon from "@material-ui/icons/Description";
-
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const SideBarData = [
   {
@@ -35,6 +35,12 @@ const SideBarData = [
     title: 'Support',
     path: '/support',
     icon: <HelpIcon />,
+    cName: 'sidebar-text'
+  },
+  {
+    title: 'Manage Users',
+    path: '/manageusers',
+    icon: <AccountCircleIcon />,
     cName: 'sidebar-text'
   },
 ];
