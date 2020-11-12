@@ -10,16 +10,8 @@ import {Container,
   Box, List, 
 ListItem, ListItemText
 } from '@material-ui/core';
-import { BrowserRouter as Router, Switch, Link, Route, Redirect } from 'react-router-dom';
-import {API_BASE_URL} from '../../../constants';
-import axios from 'axios';
 
-import CardActionArea from '@material-ui/core/CardActionArea';
-// import CardActions from '@material-ui/core/CardActions';
-// import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-// import Button from '@material-ui/core/Button';
-// import Typography from '@material-ui/core/Typography';
+import PriestsInfo from './priests_info';
 
 
 const useStyles = makeStyles({
@@ -42,66 +34,31 @@ export default function Information() {
 
   document.title = "Information | Orlem Connect"
 
-  const [getPriests, setGetPriests] = useState(false);
-  const [priests, setPriests] = useState([]);
+  const [priestsinfopage, setPriestsPage] = useState(false);
 
-  if(!getPriests){
-    setTimeout(() => {
-      axios.get(API_BASE_URL + "information/priests/").then((repos) => {
-        if(repos.status === 200){
-          setPriests(JSON.parse(repos.data));
-          console.log(priests);
-        }
-      }).then(() => setGetPriests(true));
-    }, 1200, 5000)
-  }
 
-  return (
-    <div>
+  if (priestsinfopage == false){
+    return(
+      <div>
         <Container>
           <Typography variant="h4">
               Information
           </Typography>
           <Divider />
-          <Box className={classes.main}>
-                <Typography variant="h5">
-                  Priests
-                </Typography>
-                <List>
-                  {
-                  priests.map((item, index) => (
-                    <Card className={classes.root}>
-                    <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        alt="Contemplative Reptile"
-                        height="140"
-                        image={API_BASE_URL + "media/" + item.fields.profile_pic}
-                        title="Contemplative Reptile"
-                      />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                          {item.fields.name}
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                        {item.fields.about}
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                    <CardActions>
-                      <Button size="small" color="primary">
-                        Edit
-                      </Button>
-                      <Button size="small" color="primary">
-                        Delete
-                      </Button>
-                    </CardActions>
-                  </Card>
-                  ))
-                }
-                </List>
-          </Box>    
-      </Container>
-    </div>
-  );
+          <Card className={classes.root}>
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">Priests and Deacons</Typography>
+            </CardContent>
+            <CardActions>
+              <Button size="small" color="primary" onClick={() => { setPriestsPage(true) }}>
+                Edit
+              </Button>
+            </CardActions>
+          </Card>
+        </Container>
+      </div>
+    )
+  } else if (priestsinfopage) {
+      return <PriestsInfo back={ setPriestsPage } />
+  }
 }
