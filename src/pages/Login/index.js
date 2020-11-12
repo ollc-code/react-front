@@ -1,20 +1,26 @@
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import Container from '@material-ui/core/Container';
-import Checkbox from '@material-ui/core/Checkbox';
 import React, { useState, useEffect } from 'react';
+import {
+  CssBaseline, Typography,
+  TextField, Container,
+  Checkbox, Avatar,
+  Button, Link,
+  Grid
+ } from '@material-ui/core';
+ 
 import Form from "@material-ui/core/FormGroup"
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
 import useStyles from './styles';
+import API_BASE_URL from '../../constants';
 
 
 const Login = (props) => {
+
+  document.title = "Login | Orlem Connect";
+
+  const classes = useStyles();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   useEffect(() => {
       if (window.sessionStorage.getItem('token')) {
@@ -27,12 +33,6 @@ const Login = (props) => {
     props.history.push('/dashboard');
   }
 
-  document.title = "Login | Orlem Connect";
-
-  const classes = useStyles();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -43,11 +43,11 @@ const Login = (props) => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Form className={classes.form}>
+        <form className={classes.form} onSubmit={login}>
           <TextField
             variant="outlined"
             margin="normal"
-            //required
+            required
             fullWidth
             id="username"
             label="Username"
@@ -58,7 +58,7 @@ const Login = (props) => {
           <TextField
             variant="outlined"
             margin="normal"
-            //required
+            required
             fullWidth
             name="password"
             label="Password"
@@ -77,7 +77,6 @@ const Login = (props) => {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={login}
             >Sign In
           </Button>
           <Grid container>
@@ -87,7 +86,7 @@ const Login = (props) => {
               </Link>
             </Grid>
           </Grid>
-        </Form>
+        </form>
       </div>
     </Container>
   );

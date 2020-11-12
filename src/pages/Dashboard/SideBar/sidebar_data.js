@@ -1,36 +1,40 @@
 import React from 'react';
-import * as FaIcons from 'react-icons/fa';
-import * as IoIcons from 'react-icons/io';
+import DashboardOutlinedIcon from '@material-ui/icons/DashboardOutlined';
+import MenuBookOutlinedIcon from "@material-ui/icons/MenuBookOutlined";
+import AnnouncementIcon from "@material-ui/icons/Announcement";
+import HelpIcon from "@material-ui/icons/Help";
+import DescriptionIcon from "@material-ui/icons/Description";
+
 
 const SideBarData = [
   {
     title: 'Dashboard',
     path: '/dashboard',
-    icon: <IoIcons.IoIosPaper />,
+    icon: <DashboardOutlinedIcon />,
     cName: 'sidebar-text'
   },
   {
     title: 'Readings',
     path: '/readings',
-    icon: <IoIcons.IoIosPaper />,
+    icon: <MenuBookOutlinedIcon />,
     cName: 'sidebar-text'
   },
   {
     title: 'Announcements',
     path: '/announcements',
-    icon: <FaIcons.FaPaperPlane />,
+    icon: <DescriptionIcon />,
     cName: 'sidebar-text'
   },
   {
     title: 'Information',
     path: '/information',
-    icon: <FaIcons.FaGlobe/>,
+    icon: <AnnouncementIcon />,
     cName: 'sidebar-text'
   },
   {
     title: 'Support',
     path: '/support',
-    icon: <IoIcons.IoMdHelpCircle />,
+    icon: <HelpIcon />,
     cName: 'sidebar-text'
   },
 ];

@@ -16,6 +16,17 @@ const useStyles = makeStyles((theme) => ({
     },
     drawerPaper: {
       width: drawerWidth,
+      backgroundColor: "#1e1e1e",
+    },
+    drawerItem:{
+      textDecoration: "none",
+      color: "#f9f9f9",
+    },
+    icon: {
+      color: "#f9f9f9" ,
+    },
+    drawerText: {
+      color: "#f9f9f9",
     },
     // necessary for content to be below app bar
     toolbar: theme.mixins.toolbar,

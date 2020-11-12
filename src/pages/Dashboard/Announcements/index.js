@@ -10,17 +10,19 @@ import {
 import useStyles from './styles';
 import axios from 'axios';
 import { useSnackbar } from 'notistack';
+import {API_BASE_URL} from '../../../constants';
+
 
 const Announcements = () => {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
-
   const [announcements, setAnnouncements] = useState([]);
-
-  const apiUrl = 'http://localhost:8000/announcements/';
+  const apiUrl = API_BASE_URL + 'announcements/';
   const [done, setDone] = useState(undefined);
   const [addModal, setAddModal] = useState(false);
   const [newAnnouncement, setNewAnnouncement] = useState(undefined);
+
+  document.title = "Announcements | Orlem Connect"
 
   const handleAddModal = () => {
     addModal ? (

@@ -1,12 +1,17 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
+import {Container, Typography, Divider} from '@material-ui/core';
 
 
 export default function Support() {
 
+  document.title = "Support | Orlem Connect"
+
   return (
-          <Typography variant="h4">
-              This the support page
-          </Typography>
+    <Container>
+      <Typography variant="h4">
+          Support
+      </Typography>
+      <Divider />
+    </Container>
   );
 }

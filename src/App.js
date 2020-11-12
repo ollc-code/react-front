@@ -19,8 +19,7 @@ function App() {
           <Switch>
             <Route path="/login" exact component={Login} />
             <Route path="/dashboard" exact component={Dashboard} />
-            <Redirect exact from="/" to="/login" />
-            <Route path="*" component={() => {return(<div>Check URL</div>)}} /> 
+            <Redirect from="/" to="/dashboard" />
           </Switch>
         </Router>
     </Container>
