@@ -14,10 +14,17 @@ import { BrowserRouter as Router, Switch, Link, Route, Redirect } from 'react-ro
 import {API_BASE_URL} from '../../../constants';
 import axios from 'axios';
 
+import CardActionArea from '@material-ui/core/CardActionArea';
+// import CardActions from '@material-ui/core/CardActions';
+// import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+// import Button from '@material-ui/core/Button';
+// import Typography from '@material-ui/core/Typography';
+
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
+    minWidth: 100,
     padding: 10,
   },
   title: {
@@ -31,32 +38,7 @@ const useStyles = makeStyles({
 
 
 export default function Information() {
-  const [card, setShowCard] = useState(true);
   const classes = useStyles();
-<<<<<<< HEAD
-    if(card) {
-      return (
-        <Card className={classes.root}>
-          <CardContent>
-            <Typography variant="h3" component="h2">
-              Priests
-            </Typography>
-            <Typography variant="body2" component="p">
-              Update Priest Info
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button onClick={() => { setShowCard(false) } }>Edit | Update</Button>
-          </CardActions>
-      </Card>
-      );
-    } else{
-      return(
-        <PriestsInfo back={ setShowCard } />
-      );
-    }
-
-=======
 
   document.title = "Information | Orlem Connect"
 
@@ -88,13 +70,33 @@ export default function Information() {
                 <List>
                   {
                   priests.map((item, index) => (
-                      <Card className={classes.root}>
-                        <CardContent>
+                    <Card className={classes.root}>
+                    <CardActionArea>
+                      <CardMedia
+                        component="img"
+                        alt="Contemplative Reptile"
+                        height="140"
+                        image={API_BASE_URL + "media/" + item.fields.profile_pic}
+                        title="Contemplative Reptile"
+                      />
+                      <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
                           {item.fields.name}
-                        </CardContent>
-                        <img src="http://localhost:8000/media/profiles/butterfly.jpg/"
-                          height="200" />
-                      </Card>
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                        {item.fields.about}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                    <CardActions>
+                      <Button size="small" color="primary">
+                        Edit
+                      </Button>
+                      <Button size="small" color="primary">
+                        Delete
+                      </Button>
+                    </CardActions>
+                  </Card>
                   ))
                 }
                 </List>
@@ -102,5 +104,4 @@ export default function Information() {
       </Container>
     </div>
   );
->>>>>>> e4c3b6a3e39c970e801bf49ade8f5132eb29618c
 }
