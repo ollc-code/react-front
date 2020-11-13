@@ -8,10 +8,9 @@ import {
   Button, Link,
   Grid
  } from '@material-ui/core';
- 
-import Form from "@material-ui/core/FormGroup"
 import useStyles from './styles';
-import API_BASE_URL from '../../constants';
+import {API_BASE_URL} from '../../constants';
+import axios from 'axios';
 
 
 const Login = (props) => {
@@ -22,16 +21,25 @@ const Login = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  useEffect(() => {
-      if (window.sessionStorage.getItem('token')) {
-          props.history.push('/dashboard');
-      }
-  }, [props]);
-
   function login(){
-    window.sessionStorage.setItem('token', "placeholder-token");
-    props.history.push('/dashboard');
+    const data = {
+      "username": username,
+      "password": password
+    }
+    axios.post(API_BASE_URL + "auth/jwt/", data).then((response) => {
+      if(response.status === 200){
+        //console.log(response.data["token"]);
+        window.sessionStorage.setItem("token", response.data["token"]);
+        props.history.push("/dashboard");
+      }
+    })
   }
+
+  useEffect(() => {
+    if(window.sessionStorage.getItem("token")){
+      props.history.push("/dashboard");
+    }
+  }, [props]);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -43,7 +51,7 @@ const Login = (props) => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} onSubmit={login}>
+        <form className={classes.form}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -67,12 +75,10 @@ const Login = (props) => {
             onChange={(e) => setPassword(e.target.value)}
             autoComplete="current-password"
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
           <Button
-            type="submit"
+            onClick={
+              () => {login()}
+            }
             fullWidth
             variant="contained"
             color="primary"
