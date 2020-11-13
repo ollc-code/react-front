@@ -34,7 +34,7 @@ const Profile = () => {
         setNewPassword(undefined);
         setCurrentPassword(undefined);
         setConfirmPassword(undefined);
-        setErrorShow(false)
+        setErrorShow(false);
         setEditDialogControl(true);
     }
 
