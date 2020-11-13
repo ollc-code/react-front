@@ -14,18 +14,19 @@ import Support from './Support';
 import Home from './Home';
 
 import useStyles from './styles';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 
 const Dashboard = (props) => {
 
     document.title = "Dashboard | Orlem Connect"
+    const [testToken, setTestToken] = useState(false)
 
     useEffect(() => {
         if (!window.sessionStorage.getItem('token')) {
             props.history.push('/login');
         }
-    }, [props]);
+    }, [testToken]);
 
     const classes = useStyles()
 

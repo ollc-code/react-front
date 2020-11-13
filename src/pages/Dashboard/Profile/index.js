@@ -10,7 +10,7 @@ import axios from 'axios';
 import {API_BASE_URL} from "../../../constants";
 
 
-const Profile = () => {
+const Profile = (props) => {
     const classes = useStyles();
     const [currentUser, setCurrentUser] = useState(undefined);
     const [editDialogControl, setEditDialogControl] = useState(false);
@@ -78,6 +78,10 @@ const Profile = () => {
                 API_BASE_URL + "user/", data, config
                 ).then((response) => {
                 if(response.status === 200){
+                    setEditDialogControl(false);
+                    //console.log(response.data);
+                    window.sessionStorage.removeItem("token");
+                    window.location.href = "/dashboard";
                     setLoaded(false);
                 }
             });
