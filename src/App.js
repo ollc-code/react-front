@@ -23,6 +23,7 @@ function App() {
             <Redirect exact from="/" to={pathToRedirectForRoot} />
             <Route path="/login" exact component={Login} />
             <Route path="/dashboard" exact component={Dashboard} />
+            <Redirect from="*" to="/dashboard" />
           </Switch>
         </Router>
     </Container>

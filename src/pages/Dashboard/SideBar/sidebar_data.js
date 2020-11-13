@@ -38,8 +38,8 @@ const SideBarData = [
     cName: 'sidebar-text'
   },
   {
-    title: 'Manage Users',
-    path: '/manageusers',
+    title: 'Profile',
+    path: '/profile',
     icon: <AccountCircleIcon />,
     cName: 'sidebar-text'
   },

@@ -7,7 +7,7 @@ import {
 import Announcements from './Announcements';
 import Information from './Information';
 import SideBar from './SideBar/sidebar';
-import ManageUsers from './ManageUsers';
+import Profile from './Profile';
 import PriestsInfo from './Information';
 import Readings from './Readings';
 import Support from './Support';
@@ -36,7 +36,7 @@ const Dashboard = (props) => {
                 <main className={classes.content}>
                     <Switch>
                         <Route path="/announcements" exact component={Announcements} />
-                        <Route path="/manageusers" exact component={ ManageUsers } />
+                        <Route path="/profile" exact component={ Profile } />
                         <Route path="/priestsInfo" exact component={ PriestsInfo } />
                         <Route path="/information" exact component={Information} />
                         <Route path="/readings" exact component={Readings} />
