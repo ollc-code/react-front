@@ -6,7 +6,7 @@ import {
   TextField, Container,
   Checkbox, Avatar,
   Button, Link,
-  Grid
+  Grid, Slide, Grow,
  } from '@material-ui/core';
 import useStyles from './styles';
 import {API_BASE_URL} from '../../constants';
@@ -44,56 +44,68 @@ const Login = (props) => {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={classes.form}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="username"
-            label="Username"
-            name="username"
-            onChange={(e) => setUsername(e.target.value)}
-            autofocus0="true"
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="current-password"
-          />
-          <Button
-            onClick={
-              () => {login()}
-            }
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            >Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
+        <div className={classes.paper}>
+          <Slide direction="down" in={true} timeout={600}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+          </Slide>
+          <Grow in={true} timeout={1000}>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+          </Grow>
+          <form className={classes.form}>
+          <Slide direction="left" in={true} timeout={800}>
+            <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                onChange={(e) => setUsername(e.target.value)}
+                autofocus0="true"
+              />
+          </Slide>
+          <Slide direction="right" in={true} timeout={1000}>
+            <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
+              />
+          </Slide>
+          <Slide direction="up" in={true} timeout={1000}>          
+            <Button
+              onClick={
+                () => {login()}
+              }
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              >Sign In
+            </Button>
+          </Slide>
+          <Slide direction="right" in={true} timeout={1700}>
+            <Grid container>
+              <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
+                  </Link>
+              </Grid>
             </Grid>
-          </Grid>
-        </form>
-      </div>
+            </Slide>
+          </form>
+        </div>
     </Container>
   );
 }

@@ -3,6 +3,7 @@ import {
     Divider, Button, Dialog, DialogTitle,
     DialogContent, DialogActions, DialogContentText,
     Card, CardHeader, CardContent, CardActions,
+    Grow, Slide
 } from '@material-ui/core';
 import useStyles from './styles';
 import React, { useState, useEffect } from "react";
@@ -27,6 +28,11 @@ const Profile = (props) => {
     const [confirmPassword, setConfirmPassword] = useState(undefined);
     const [errorShow, setErrorShow] = useState(false)
 
+    const Transition = React.forwardRef(function Transition(props, ref) {
+        return <Slide direction="up" ref={ref} {...props} />;
+      });
+    
+    
     function handleEditDialog(){
         setName(currentUser.fields.name);
         setUsername(currentUser.fields.username);
@@ -95,6 +101,10 @@ const Profile = (props) => {
         getCurrentUserDetails(), [loaded]
     );
 
+    const handleDialogClose = () => {
+        setEditDialogControl(false)
+    }
+
     return (
         <Container>
             <Typography variant="h4">
@@ -104,33 +114,35 @@ const Profile = (props) => {
             <Container className={classes.main}>
                 {
                     loaded ? (
-                        <Card>
-                            <CardHeader title={currentUser.fields.name} />
-                            <Divider />
-                            <CardContent>
-                                <Box className={classes.cardContent}>
-                                    <Typography variant="h6">
-                                        Username
-                                    </Typography>
-                                    <Typography  variant="body2">
-                                        {currentUser.fields.username}
-                                    </Typography>
-                                </Box>
-                                <Box className={classes.cardContent}>
-                                    <Typography variant="h6">
-                                        Email
-                                    </Typography>
-                                    <Typography  variant="body">
-                                        {currentUser.fields.email}
-                                    </Typography>
-                                </Box>
-                            </CardContent>                    
-                            <CardActions>
-                                <Button onClick={() => {handleEditDialog()}} variant="contained" color="secondary">
-                                    Edit Details
-                                </Button>
-                            </CardActions>
-                        </Card>
+                        <Grow in={true} timeout={1000} >
+                            <Card>
+                                <CardHeader title={currentUser.fields.name} />
+                                <Divider />
+                                <CardContent>
+                                    <Box className={classes.cardContent}>
+                                        <Typography variant="h6">
+                                            Username
+                                        </Typography>
+                                        <Typography  variant="body2">
+                                            {currentUser.fields.username}
+                                        </Typography>
+                                    </Box>
+                                    <Box className={classes.cardContent}>
+                                        <Typography variant="h6">
+                                            Email
+                                        </Typography>
+                                        <Typography  variant="body">
+                                            {currentUser.fields.email}
+                                        </Typography>
+                                    </Box>
+                                </CardContent>                    
+                                <CardActions>
+                                    <Button onClick={() => {handleEditDialog()}} variant="contained" color="secondary">
+                                        Edit Details
+                                    </Button>
+                                </CardActions>
+                            </Card>
+                        </Grow>
                     ) : (
                         <Typography>
                             Loading...
@@ -138,117 +150,115 @@ const Profile = (props) => {
                     )
                 }
             </Container>
-            {
-                editDialogControl ? (
-                    <Dialog open={editDialogControl} onClose={() => {setEditDialogControl(false)}} aria-labelledby="form-dialog-title">
-                        <DialogTitle id="form-dialog-title">User Details</DialogTitle>
-                        <form>
-                            <DialogContent>
-                                <DialogContentText>
-                                    Basic Details
-                                </DialogContentText>
-                                <TextField
-                                    margin="dense"
-                                    variant="outlined"
-                                    id="name"
-                                    value={name}
-                                    onChange={(e) => {setName(e.target.value)}}
-                                    label="Name"
-                                    type="text"
-                                    fullWidth
-                                />
-                                <TextField
-                                    margin="dense"
-                                    variant="outlined"
-                                    id="username"
-                                    disabled
-                                    value={username}
-                                    onChange={(e) => {setUsername(e.target.value)}}
-                                    label="Username"
-                                    type="text"
-                                    fullWidth
-                                />
-                                <TextField
-                                    margin="dense"
-                                    variant="outlined"
-                                    id="email"
-                                    value={email}
-                                    onChange={(e) => {setEmail(e.target.value)}}
-                                    label="Email"
-                                    type="email"
-                                    fullWidth
-                                />
-                                <DialogActions>
-                                    <Button onClick={() => {updateBasicDetails()}} variant="contained" color="secondary">
-                                        Update Details
-                                    </Button>
-                                </DialogActions>
-                            </DialogContent>
-                        </form>
-                        <form>
-                            <DialogContent>
-                                <DialogContentText>
-                                    Change Password
-                                </DialogContentText>
-                                <TextField
-                                    margin="dense"
-                                    variant="outlined"
-                                    id="password"
-                                    required
-                                    value={currentPassword}
-                                    onChange={(e) => {setCurrentPassword(e.target.value)}}
-                                    label="Current Password"
-                                    type="text"
-                                    fullWidth
-                                />
-                                <TextField
-                                    margin="dense"
-                                    variant="outlined"
-                                    id="password"
-                                    required
-                                    value={newPassword}
-                                    onChange={(e) => {setNewPassword(e.target.value)}}
-                                    label="New Password"
-                                    type="text"
-                                    fullWidth
-                                />
-                                <TextField
-                                    margin="dense"
-                                    variant="outlined"
-                                    required
-                                    id="confirmPassword"
-                                    value={confirmPassword}
-                                    onChange={(e) => {setConfirmPassword(e.target.value)}}
-                                    label="Confirm Password"
-                                    type="text"
-                                    fullWidth
-                                />
-                                {
-                                    errorShow ? (
-                                        <Typography variant="body2">
-                                            Passwords don't match
-                                        </Typography>
-                                    ) : (
-                                        <Typography />
-                                    )
-                                }
-                                <DialogActions>
-                                    <Button onClick={() => {updatePassword()}} variant="contained" color="secondary">
-                                    Change Password
-                                    </Button>
-                                </DialogActions>
-                                <DialogActions>
-                                    <Button onClick={() => {setEditDialogControl(false)}} variant="outlined" color="primary">
-                                        Cancel
-                                    </Button>
-                                </DialogActions>
-                            </DialogContent>  
-                        </form>
-                    </Dialog>                    
-                ) : (
-                    <Box />
-                )
-            }
+            
+                <Dialog open={editDialogControl} onClose={handleDialogClose}
+                            
+                        >
+                            <DialogTitle id="form-dialog-title">User Details</DialogTitle>
+                            <form>
+                                <DialogContent>
+                                    <DialogContentText>
+                                        Basic Details
+                                    </DialogContentText>
+                                    <TextField
+                                        margin="dense"
+                                        variant="outlined"
+                                        id="name"
+                                        value={name}
+                                        onChange={(e) => {setName(e.target.value)}}
+                                        label="Name"
+                                        type="text"
+                                        fullWidth
+                                    />
+                                    <TextField
+                                        margin="dense"
+                                        variant="outlined"
+                                        id="username"
+                                        disabled
+                                        value={username}
+                                        onChange={(e) => {setUsername(e.target.value)}}
+                                        label="Username"
+                                        type="text"
+                                        fullWidth
+                                    />
+                                    <TextField
+                                        margin="dense"
+                                        variant="outlined"
+                                        id="email"
+                                        value={email}
+                                        onChange={(e) => {setEmail(e.target.value)}}
+                                        label="Email"
+                                        type="email"
+                                        fullWidth
+                                    />
+                                    <DialogActions>
+                                        <Button onClick={() => {updateBasicDetails()}} variant="contained" color="secondary">
+                                            Update Details
+                                        </Button>
+                                    </DialogActions>
+                                </DialogContent>
+                            </form>
+                            <form>
+                                <DialogContent>
+                                    <DialogContentText>
+                                        Change Password
+                                    </DialogContentText>
+                                    <TextField
+                                        margin="dense"
+                                        variant="outlined"
+                                        id="password"
+                                        required
+                                        value={currentPassword}
+                                        onChange={(e) => {setCurrentPassword(e.target.value)}}
+                                        label="Current Password"
+                                        type="text"
+                                        fullWidth
+                                    />
+                                    <TextField
+                                        margin="dense"
+                                        variant="outlined"
+                                        id="password"
+                                        required
+                                        value={newPassword}
+                                        onChange={(e) => {setNewPassword(e.target.value)}}
+                                        label="New Password"
+                                        type="text"
+                                        fullWidth
+                                    />
+                                    <TextField
+                                        margin="dense"
+                                        variant="outlined"
+                                        required
+                                        id="confirmPassword"
+                                        value={confirmPassword}
+                                        onChange={(e) => {setConfirmPassword(e.target.value)}}
+                                        label="Confirm Password"
+                                        type="text"
+                                        fullWidth
+                                    />
+                                    {
+                                        errorShow ? (
+                                            <Typography variant="body2">
+                                                Passwords don't match
+                                            </Typography>
+                                        ) : (
+                                            <Typography />
+                                        )
+                                    }
+                                    <DialogActions>
+                                        <Button onClick={() => {updatePassword()}} variant="contained" color="secondary">
+                                        Change Password
+                                        </Button>
+                                    </DialogActions>
+                                    <DialogActions>
+                                        <Button onClick={handleDialogClose} variant="outlined" color="primary">
+                                            Cancel
+                                        </Button>
+                                    </DialogActions>
+                                </DialogContent>  
+                            </form>
+                        </Dialog>   
+                        
         </Container>
     )
 }

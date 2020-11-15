@@ -8,7 +8,7 @@ import axios from 'axios';
 import {
   Typography, Container, Divider,
   Box, List, ListItem, Card, CardContent,
-  Button, TextField, Modal, Fade,
+  Button, TextField, Modal, Fade, Grow,
 } from '@material-ui/core';
 
 
@@ -23,7 +23,7 @@ const Announcements = () => {
   const [addModal, setAddModal] = useState(false);
   const [announcements, setAnnouncements] = useState([]);
   const [newAnnouncement, setNewAnnouncement] = useState(undefined);
-
+  const [checked, setChecked] = React.useState(false);
 
   function getAnnouncements(){
     setTimeout(() => {
@@ -89,30 +89,34 @@ const Announcements = () => {
         ) : (
           <Box className={classes.main} display="grid">
               <List>
-                {announcements.map((item, index) => (
-                  <ListItem className={classes.listItem}>
-                    <Card className={classes.card} >
-                      <CardContent className={classes.cardContent}>
-                        <Typography  className={classes.cardContent}>
-                        {item.fields.text}
-                        </Typography>
-                      </CardContent>
-                      <Button variant="outlined" onClick={() => {deleteAnnouncement(item)}}>
-                          <DeleteOutlinedIcon />
-                      </Button>
-                    </Card>
-                  </ListItem>
-                ))}
+                  {announcements.map((item, index) => (
+                    <ListItem className={classes.listItem}>
+                      <Grow in={true} timeout={500}>
+                        <Card className={classes.card} >
+                          <CardContent className={classes.cardContent}>
+                            <Typography  className={classes.cardContent}>
+                            {item.fields.text}
+                            </Typography>
+                          </CardContent>
+                          <Button variant="outlined" onClick={() => {deleteAnnouncement(item)}}>
+                              <DeleteOutlinedIcon />
+                          </Button>
+                        </Card>
+                      </Grow>
+                    </ListItem>
+                  ))}
               </List>
               
-            <Button className={classes.addButton} onClick={() => {setAddModal(true)}} variant="contained" color="primary">
-              Add
-            </Button>
+            <Grow in={true} timeout={1000}>
+              <Button className={classes.addButton} onClick={() => {setAddModal(true)}} variant="contained" color="primary">
+                Add
+              </Button>
+            </Grow>
             
             <Modal open={addModal} 
               onClose={() => {setAddModal(false)}} className={classes.modal} 
               closeAfterTransition disableScrollLock={true}>
-                <Fade in={addModal}>
+                <Fade in={addModal}  timeout={1000}>
                   <Container display="grid" 
                     justifyContent="center" maxWidth="sm" 
                     className={[classes.paper, classes.main]}>
@@ -124,7 +128,7 @@ const Announcements = () => {
                         onChange={(e) => {setNewAnnouncement(e.target.value)}}
                         rows={6}
                         variant="outlined"/>
-                      <Button type="submit" variant="contained" fullWidth color="secondary">
+                      <Button type="submit" variant="outlined" fullWidth color="primary">
                         Add
                       </Button>
                     </form>

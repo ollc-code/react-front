@@ -4,7 +4,7 @@ import useStyles from '../styles';
 import {
   ListItemIcon, ListItemText,
   ListItem, Divider,
-  Drawer, List,
+  Drawer, List, Slide, Grow,
  } from '@material-ui/core';
 import React from 'react';
 import theme from '../../../theme';
@@ -34,30 +34,35 @@ export default function PermanentDrawerLeft({props}) {
             <ListItemIcon> <img src={logo} height="100" /> </ListItemIcon>
           </ListItem>
           {SideBarData.map((item, index) => (
-            <NavLink
-              className={classes.drawerItem}
-              activeStyle={{
-                  fontWeight: "bolder",
-                  color: theme.palette.secondary.main
-                }} 
-                to={item.path}>
-              <ListItem button>
-                  <ListItemIcon className={classes.icon}>{ item.icon }</ListItemIcon>
-                  <ListItemText >
-                  {item.title}
-                  </ListItemText>
-              </ListItem>
-            </NavLink>
+              <NavLink
+                className={classes.drawerItem}
+                activeStyle={{
+                    fontWeight: "bolder",
+                    color: theme.palette.secondary.main
+                  }} 
+                  to={item.path}>
+              <Slide in={true} direction="right" timeout={100 * (index + 1)} >
+                <ListItem button>
+                    <ListItemIcon className={classes.icon}>{ item.icon }</ListItemIcon>
+                    <ListItemText >
+                    {item.title}
+                    </ListItemText>
+                </ListItem>
+              </Slide>
+              </NavLink>
           ))}
           <a onClick={logout}>
+          <Grow in={true} timeout={2000}>
             <ListItem button>
                 <ListItemIcon className={classes.icon}> <ExitToAppIcon /> </ListItemIcon>
                 <ListItemText className={classes.drawerText} color="primary">
                   Logout
                 </ListItemText>
             </ListItem>
+          </Grow>
           </a>
         </List>
       </Drawer>
+
   );
 }
