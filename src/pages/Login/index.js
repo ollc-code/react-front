@@ -1,32 +1,19 @@
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import Container from '@material-ui/core/Container';
-import Checkbox from '@material-ui/core/Checkbox';
 import React, { useState, useEffect } from 'react';
-import Form from "@material-ui/core/FormGroup"
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
+import {
+  CssBaseline, Typography,
+  TextField, Container,
+  Checkbox, Avatar,
+  Button, Link,
+  Grid, Slide, Grow,
+ } from '@material-ui/core';
 import useStyles from './styles';
-import API_BASE_URL from '../../constants';
+import {API_BASE_URL} from '../../constants';
+import axios from 'axios';
 
 
 const Login = (props) => {
-
-  useEffect(() => {
-      if (window.sessionStorage.getItem('token')) {
-          props.history.push('/dashboard');
-      }
-  }, [props]);
-
-  function login(){
-    window.sessionStorage.setItem('token', "placeholder-token");
-    props.history.push('/dashboard');
-  }
 
   document.title = "Login | Orlem Connect";
 
@@ -34,62 +21,91 @@ const Login = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  function login(){
+    const data = {
+      "username": username,
+      "password": password
+    }
+    axios.post(API_BASE_URL + "auth/jwt/", data).then((response) => {
+      if(response.status === 200){
+        //console.log(response.data["token"]);
+        window.sessionStorage.setItem("token", response.data["token"]);
+        props.history.push("/dashboard");
+      }
+    })
+  }
+
+  useEffect(() => {
+    if(window.sessionStorage.getItem("token")){
+      props.history.push("/dashboard");
+    }
+  }, [props]);
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <Form className={classes.form}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            //required
-            fullWidth
-            id="username"
-            label="Username"
-            name="username"
-            onChange={(e) => setUsername(e.target.value)}
-            autofocus0="true"
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            //required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={login}
-            >Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
+        <div className={classes.paper}>
+          <Slide direction="down" in={true} timeout={600}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+          </Slide>
+          <Grow in={true} timeout={1000}>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+          </Grow>
+          <form className={classes.form}>
+          <Slide direction="left" in={true} timeout={800}>
+            <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                onChange={(e) => setUsername(e.target.value)}
+                autofocus0="true"
+              />
+          </Slide>
+          <Slide direction="right" in={true} timeout={1000}>
+            <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
+              />
+          </Slide>
+          <Slide direction="up" in={true} timeout={1000}>          
+            <Button
+              onClick={
+                () => {login()}
+              }
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              >Sign In
+            </Button>
+          </Slide>
+          <Slide direction="right" in={true} timeout={1700}>
+            <Grid container>
+              <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
+                  </Link>
+              </Grid>
             </Grid>
-          </Grid>
-        </Form>
-      </div>
+            </Slide>
+          </form>
+        </div>
     </Container>
   );
 }

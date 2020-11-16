@@ -1,13 +1,15 @@
 import SideBarData from './sidebar_data';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import useStyles from '../styles';
 import {
   ListItemIcon, ListItemText,
   ListItem, Divider,
-  Drawer, List,
+  Drawer, List, Slide, Grow,
  } from '@material-ui/core';
 import React from 'react';
-
+import theme from '../../../theme';
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import logo from '../../../assets/logo_dark.svg';
 
 export default function PermanentDrawerLeft({props}) {
   const classes = useStyles();
@@ -28,25 +30,39 @@ export default function PermanentDrawerLeft({props}) {
       >
         <Divider />
         <List>
+          <ListItem className={classes.SidebarLogo}>
+            <ListItemIcon> <img src={logo} height="100" /> </ListItemIcon>
+          </ListItem>
           {SideBarData.map((item, index) => (
-            <Link to={item.path}>
-              <ListItem button>
-                  <ListItemIcon>{ item.icon }</ListItemIcon>
-                  <ListItemText color="primary">
-                  {item.title}
-                  </ListItemText>
-              </ListItem>
-            </Link>
+              <NavLink
+                className={classes.drawerItem}
+                activeStyle={{
+                    fontWeight: "bolder",
+                    color: theme.palette.secondary.main
+                  }} 
+                  to={item.path}>
+              <Slide in={true} direction="right" timeout={100 * (index + 1)} >
+                <ListItem button>
+                    <ListItemIcon className={classes.icon}>{ item.icon }</ListItemIcon>
+                    <ListItemText >
+                    {item.title}
+                    </ListItemText>
+                </ListItem>
+              </Slide>
+              </NavLink>
           ))}
           <a onClick={logout}>
+          <Grow in={true} timeout={2000}>
             <ListItem button>
-                <ListItemIcon> (Icon) </ListItemIcon>
-                <ListItemText color="primary">
+                <ListItemIcon className={classes.icon}> <ExitToAppIcon /> </ListItemIcon>
+                <ListItemText className={classes.drawerText} color="primary">
                   Logout
                 </ListItemText>
             </ListItem>
+          </Grow>
           </a>
         </List>
       </Drawer>
+
   );
 }

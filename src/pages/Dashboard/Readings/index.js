@@ -1,12 +1,17 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
+import {Container, Typography, Divider} from '@material-ui/core';
 
 
 export default function Readings() {
 
+  document.title = "Readings | Orlem Connect"
+
   return (
-          <Typography variant="h4">
-              This the readings page
-          </Typography>
+    <Container>
+      <Typography variant="h4">
+          Readings
+      </Typography>
+      <Divider />
+    </Container>
   );
 }

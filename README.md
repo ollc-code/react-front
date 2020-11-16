@@ -1,5 +1,8 @@
 ## OLLC Front-End ~ React
 
+
+> ## Run the command below after pulling the code from the repo
+
 > ## Just npm start, and you may have to install few extra modules'
 
 ---
@@ -16,3 +19,7 @@
 ```
 Note: Not using yarn, but you could save your dependencies offline
 ```
+npm install
+```
+
+> ## After which you can run `npm start`

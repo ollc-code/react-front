@@ -9,18 +9,25 @@ import {
 
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
+import UserReadings from './pages/UserPages/Readings';
 
 
 function App() {
+
+  const pathToRedirectForAdmin = window.sessionStorage.getItem('token') ? '/admin/dashboard' : '/admin/login';
+  const pathToRedirectForUser = '/dashboard';
+
   return (
     <Container>
       <CssBaseline/>
         <Router>
           <Switch>
-            <Route path="/login" exact component={Login} />
-            <Route path="/dashboard" exact component={Dashboard} />
-            <Redirect exact from="/" to="/login" />
-            <Route path="*" component={() => {return(<div>Check URL</div>)}} /> 
+            <Redirect exact from="/" to={pathToRedirectForUser} />
+            <Redirect exact from="/admin" to={pathToRedirectForAdmin} />
+            <Route exact path="/admin/login" component={Login} />
+            <Route exact path="/admin/dashboard" component={Dashboard} />
+            <Route exact path="/readings" component={UserReadings} />
+            <Redirect from="*" to="/admin/dashboard" />
           </Switch>
         </Router>
     </Container>
