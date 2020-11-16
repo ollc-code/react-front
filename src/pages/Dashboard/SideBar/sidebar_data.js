@@ -9,37 +9,37 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 const SideBarData = [
   {
     title: 'Dashboard',
-    path: '/dashboard',
+    path: '/admin/dashboard',
     icon: <DashboardOutlinedIcon />,
     cName: 'sidebar-text'
   },
   {
     title: 'Readings',
-    path: '/readings',
+    path: '/admin/readings',
     icon: <MenuBookOutlinedIcon />,
     cName: 'sidebar-text'
   },
   {
     title: 'Announcements',
-    path: '/announcements',
+    path: '/admin/announcements',
     icon: <DescriptionIcon />,
     cName: 'sidebar-text'
   },
   {
     title: 'Information',
-    path: '/information',
+    path: '/admin/information',
     icon: <AnnouncementIcon />,
     cName: 'sidebar-text'
   },
   {
     title: 'Support',
-    path: '/support',
+    path: '/admin/support',
     icon: <HelpIcon />,
     cName: 'sidebar-text'
   },
   {
     title: 'Profile',
-    path: '/profile',
+    path: '/admin/profile',
     icon: <AccountCircleIcon />,
     cName: 'sidebar-text'
   },

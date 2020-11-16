@@ -6,7 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import {Container, 
   Typography, 
-  Divider, 
+  Divider, Grow,
   Box, List, 
 ListItem, ListItemText
 } from '@material-ui/core';
@@ -45,16 +45,18 @@ export default function Information() {
               Information
           </Typography>
           <Divider />
-          <Card className={classes.root}>
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">Priests and Deacons</Typography>
-            </CardContent>
-            <CardActions>
-              <Button size="small" color="primary" onClick={() => { setPriestsPage(true) }}>
-                Edit
-              </Button>
-            </CardActions>
-          </Card>
+          <Grow in={true} timeout={1000}>
+            <Card className={classes.root}>
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">Priests and Deacons</Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small" color="primary" onClick={() => { setPriestsPage(true) }}>
+                  Edit
+                </Button>
+              </CardActions>
+            </Card>
+          </Grow>
         </Container>
       </div>
     )

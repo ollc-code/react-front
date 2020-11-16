@@ -24,7 +24,7 @@ const Dashboard = (props) => {
 
     useEffect(() => {
         if (!window.sessionStorage.getItem('token')) {
-            props.history.push('/login');
+            props.history.push('/admin/login');
         }
     }, [testToken]);
 
@@ -36,13 +36,13 @@ const Dashboard = (props) => {
                 <SideBar props={props} />
                 <main className={classes.content}>
                     <Switch>
-                        <Route path="/announcements" exact component={Announcements} />
-                        <Route path="/profile" exact component={ Profile } />
-                        <Route path="/priestsInfo" exact component={ PriestsInfo } />
-                        <Route path="/information" exact component={Information} />
-                        <Route path="/readings" exact component={Readings} />
-                        <Route path="/support" exact component={Support} />
-                        <Route path="/dashboard" exact component={Home} />
+                        <Route path="/admin/announcements" exact component={Announcements} />
+                        <Route path="/admin/profile" exact component={ Profile } />
+                        <Route path="/admin/priestsInfo" exact component={ PriestsInfo } />
+                        <Route path="/admin/information" exact component={Information} />
+                        <Route path="/admin/readings" exact component={Readings} />
+                        <Route path="/admin/support" exact component={Support} />
+                        <Route path="/admin/dashboard" exact component={Home} />
                     </Switch>
                 </main>
             </Container>
